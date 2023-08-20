@@ -174,9 +174,9 @@ function json() {
 
 function struct(json) {
     let div = document.getElementById("response");
-    div.innerHTML = `<b>Time</b>: ${json.agents[0].store.time}<br>`
+    div.innerHTML = `<span style="color: blue"><b>Time</b>: ${json.agents[0].store.time}</span><br>`
     for(let ship of json.agents)
-        div.innerHTML += `<b>Ship</b> ${ship.store.name}: (x,y, angle, v): (${ship.store.x}, ${ship.store.y}, ${ship.store.angle}, ${ship.store.v}), observed: ${JSON.stringify(ship.observed)}<br>`;
+        div.innerHTML += `<b>Ship</b> <u>${ship.store.name}</u>: (x,y, angle, v): (${ship.store.x}, ${ship.store.y}, ${ship.store.angle}, ${ship.store.v}),<br><div style="padding:10px"><span style="color: blue">observed</span>: ${JSON.stringify(ship.observed)}</div><br>`;
     if(json.config) {
         div.innerHTML += `<br>${JSON.stringify(json.config, null, "&nbsp;").replaceAll("\n", "<br>")}`
         configJson = json.config
