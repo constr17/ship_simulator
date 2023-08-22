@@ -1,3 +1,4 @@
+let debug = require('debug')('ship-simulator:ship1');
 module.exports = {
     "init": {
         "x": 0, // м
@@ -11,6 +12,7 @@ module.exports = {
         [dx, dy] = utils.linearIncrement(store.angle, store.v); // Пересчитали в приращение
         store.x += dx; // Применили приращение
         store.y += dy;
-        // Содержание observed (наблюдаемых объекто) не учитывается
+        // Содержание observed (наблюдаемых объектов) не учитывается
+        debug(JSON.stringify(observed)); // Вывод observed в консоль сервера в режиме отладки
     }
 }

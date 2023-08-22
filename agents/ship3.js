@@ -13,6 +13,6 @@ module.exports = {
         [dx, dy] = utils.linearIncrement(store.angle, store.v); // Пересчитали в приращение
         store.x += dx; // Применили приращение
         store.y += dy;
-        // Содержание observed (наблюдаемых объекто) не учитывается
+        // Содержание observed (наблюдаемых объектов) не учитывается
     }
 }

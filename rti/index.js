@@ -1,5 +1,6 @@
 const utils = require('./utils');
 const fs = require('fs');
+const folder = "./agents/";
 const rti = {
     agents: [],
     time: 0,
@@ -7,11 +8,11 @@ const rti = {
     init: function () {
         this.time = 0;
         this.agents = [];
-        let files = fs.readdirSync("./agents")
+        let files = fs.readdirSync(folder)
         console.log(JSON.stringify(files))
         for(let file of files)
             if (file.endsWith(".js")) {
-                let agent = fs.readFileSync("./agents/" + file, {encoding:"utf-8"});
+                let agent = fs.readFileSync(folder + file, {encoding:"utf-8"});
                 agent = eval(agent);
                 agent.init.name = file.substr(0, file.length - 3);
                 agent.init.time = this.time;
@@ -22,9 +23,9 @@ const rti = {
             let agent = this.agents[i];
             agent.init.invFreq = Math.floor(1 / agent.init.frequency);
         }
-        utils.seed("serge");
-        let config = fs.readFileSync("./agents/config.json", {encoding:"utf-8"});
+        let config = fs.readFileSync(folder + "config.json", {encoding:"utf-8"});
         this.config = JSON.parse(config);
+        utils.seed(this.config.seed);
     },
     next: function () {
         this.time++;
