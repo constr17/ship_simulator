@@ -12,6 +12,25 @@ let utils = {
         const angle0 = angle / 180 * Math.PI;
         return this.polarToDecart(angle0, v0)
     },
+    rotate(right, store) {
+        if(!store.length)
+            throw new Error("Expected length in store");
+        let r = store.length * 2;
+        let v = store.v;
+        let angle = store.angle;
+        let a = v / (r * Math.PI); // угол сектора в радианах по длине дуги
+        let sign = (right ? 1 : -1); // в какую сторону поворачиваем
+        let dAngle = sign * a * 180 / Math.PI;
+        let c = 2 * r * Math.sin(a / 2); // длина хорды
+        let gamma = angle + sign * (90 - (180 - a * 180  / Math.PI) / 2); // угол между хордой и вертикалью
+        if (gamma < 0)
+            gamma += 360;
+        if (gamma > 360)
+            gamma -= 360;
+        let dx = c * Math.sin(gamma / 180 * Math.PI);
+        let dy = c * Math.cos(gamma / 180 * Math.PI);
+        return [dAngle, dx, dy];
+    },
     polarToDecart: function(angle, distance) {
         return [Math.sin(angle)*distance, Math.cos(angle)*distance]
     },
